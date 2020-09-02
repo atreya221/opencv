@@ -4,7 +4,7 @@
 
 # 1. Make sure you have python/python3  and pip installed and can be executed using respective commands from CMD.
 # 2. cd "path/to/project/directory/".
-# 3. Run "python -m pip install virtualenv" or "python3 -m pip install virtualenv". (if virtual environment is not already installed)
+# 3. Run "python -m pip install virtualenv" or "python3 -m pip install virtualenv". (if virtualenv module is not already installed)
 # 4. Activate virtual environment using ".\opencv1\Scripts\activate".
 # 5. Install the necessary modules using "pip install -r requirements.txt".
 
@@ -12,7 +12,7 @@
 
 # 1. Make sure you have python/python3 installed and can be executed using respective commands from bash.
 # 2. cd "path/to/project/directory/".
-# 3. Run "python -m pip install --user virtualenv" or "python3 -m pip install --user virtualenv". (if virtual environment is not already installed)
+# 3. Run "python -m pip install --user virtualenv" or "python3 -m pip install --user virtualenv". (if virtualenv module is not already installed)
 # 4. Run "source opencv2/bin/activate" to activate the virtual environment.
 # 5. Install the necessary modules using "pip install -r requirements.txt".
 
