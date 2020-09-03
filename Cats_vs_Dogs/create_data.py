@@ -4,6 +4,8 @@ import zipfile
 import shutil
 import pyfastcopy
 
+# print(os.system('where python'))
+
 classes = []
 count = 0
  
