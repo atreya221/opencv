@@ -1,4 +1,5 @@
 
+**/*.json
 **/*.h5
 **/data/train/
 .env/**
