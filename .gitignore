@@ -1,7 +1,6 @@
 
-Cats_vs_Dogs/*.h5
-Cats_vs_Dogs/*.zip
-Cats_vs_Dogs/data/train/
+**/*.h5
+**/data/train/
 .env/**
 MNIST/test.jpg
 .vscode
