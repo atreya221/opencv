@@ -8,6 +8,7 @@ if platform.system() == 'Windows':
 
 if platform.system() == 'Linux':
   os.system('python -m pip install --user virtualenv')
-  os.system('source opencv2/bin/activate; pip install -r requirements.txt')
+  os.system('. opencv2/bin/activate; pip install --upgrade pip setuptools wheel')
+  os.system('. opencv2/bin/activate; pip install -r requirements.txt')
   
 
