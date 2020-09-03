@@ -1,6 +1,7 @@
 ################################################################
 
-# run the setup.py file to install the required dependancies.
+# For Windows users, run python setup.py (or python3 setup.py).
+# For linux users, run python3 setup.py.
 
 ################################################################
 
