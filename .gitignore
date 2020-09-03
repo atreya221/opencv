@@ -1,3 +1,7 @@
 
 Cats_vs_Dogs/*.h5
 Cats_vs_Dogs/*.zip
+Cats_vs_Dogs/data/train/
+opencv1/*
+MNIST/test.jpg
+.vscode/*
