@@ -8,7 +8,7 @@ import pyfastcopy
 
 classes = []
 count = 0
- 
+
 # Minimum of 2 classes
 for i in range(2):
   count = count + 1
@@ -24,7 +24,7 @@ while True:
     classes.append(class_name)
   elif more_classes=='N' or more_classes=='n':
     break
-   else:
+  else:
     print('Please enter a valid choice.')
 
 print("This code may take a couple of minutes to run depending on your system and size of dataset.")
