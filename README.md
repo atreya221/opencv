@@ -1,3 +1,11 @@
-# A clone of Teachable Machine
+# A Simple Teachable Machine
 
-Follow the instructions in requirements.txt
+To setup the environment for the project :
+
+1. Navigate to the project directory and run the command python setup.py or (python3 setup.py) 
+   depending on your default python path.
+
+2. 
+
+
+

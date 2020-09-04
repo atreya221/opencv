@@ -10,11 +10,12 @@ if platform.system() == 'Linux':
 
 #################################
 
+
 trained = False
 
 #################################
 
-if trained == False:
+if train_local == True:
   if platform.system() == 'Windows':
     os.system('..\.env\Scripts\\activate & python train_model.py')
     trained = True
@@ -43,13 +44,13 @@ if ans.lower() == 'y':
 
 else :
   # Delete model, weights and training data
-  
+
   if platform.system() == 'Windows':
     os.system('..\.env\Scripts\\activate & python restore.py')
 
   if platform.system() == 'Linux':
     os.system('. ../.env/bin/activate; python restore.py')
-    
+
   control = ("Thank you for being with us. We hope you enjoyed our application.\nPress 'r' to rerun the application and 'q' to exit")
   if control == 'r' :
     if platform.system() == 'Windows':
@@ -59,7 +60,7 @@ else :
       os.system('. ../.env/bin/activate; python script.py')
   if control == 'q' :
     sys.exit()
-  
+
   sys.exit()
-  
-  
+
+
