@@ -3,5 +3,5 @@
 **/*.h5
 **/data/train/
 .env/**
-MNIST/test.jpg
+Digit_recognizer/test.jpg
 .vscode
