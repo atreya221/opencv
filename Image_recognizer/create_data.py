@@ -18,12 +18,14 @@ for i in range(2):
 # Additional classes
 while True:
   more_classes = input('Add another class? Press Y for yes, N for no.\n')
-  if more_classes == 'Y':
+  if more_classes == 'Y' or more_classes=='y':
     count = count + 1
     class_name = input(f'Enter title of class {count}:\n')
     classes.append(class_name)
-  else:
+  elif more_classes=='N' or more_classes=='n':
     break
+   else:
+    print('Please enter a valid choice.')
 
 print("This code may take a couple of minutes to run depending on your system and size of dataset.")
 print("Preparing your dataset ...")
