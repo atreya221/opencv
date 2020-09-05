@@ -28,7 +28,7 @@ while True:
 print("This code may take a couple of minutes to run depending on your system and size of dataset.")
 print("Preparing your dataset ...")
 suc = 1
-for class_cat in classes:
+for class_cat in sorted(classes):
     dir_loc = input(f"Enter location of directory containing images of class '{class_cat}':\n")
     try:
         shutil.copytree(dir_loc, f'./data/train/{class_cat}')

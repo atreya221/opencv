@@ -9,6 +9,7 @@ if platform.system() == 'Windows':
   
 
 if platform.system() == 'Linux':
+  os.system('python3 -m pip install --upgrade pip')
   os.system('python3 -m pip install --user virtualenv')
   os.system('python3 -m venv .env')
   os.system('. .env/bin/activate; pip install --upgrade pip setuptools wheel')

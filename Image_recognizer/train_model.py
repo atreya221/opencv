@@ -37,15 +37,14 @@ val_ds = keras.preprocessing.image_dataset_from_directory(
 )
 
 classes = train_ds.class_names
+print(classes)
 
 for images, labels in train_ds:
   images_shape = images.shape
   labels_shape = labels.shape
   print(images.shape)
-  print(labels.shape)
-  print(type(images))
+  #print(type(images))
   break
-
 
 # Define the model architecture
 
@@ -55,7 +54,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dens
 model = Sequential()
 
 model.add(keras.layers.experimental.preprocessing.Rescaling(1./255, input_shape=(180, 180, 3))) # Normalize the dataset to improve accuracy
-
+"""
 model.add(Conv2D(32, (3, 3), activation='relu'))  
 model.add(BatchNormalization())  # normalize the activations after each layer
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -75,12 +74,26 @@ model.add(Flatten())
 model.add(Dense(512, activation='relu'))
 model.add(BatchNormalization())
 model.add(Dropout(0.5))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(2, activation='softmax'))
+
+model = Sequential([
+  layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
+  """
+model.add(Conv2D(16, 3, padding='same', activation='relu'))
+model.add(MaxPooling2D())  
+model.add(Conv2D(32, 3, padding='same', activation='relu'))
+model.add(MaxPooling2D())
+model.add(Conv2D(64, 3, padding='same', activation='relu'))
+model.add(MaxPooling2D())
+model.add(Flatten())
+model.add(Dense(128, activation='relu'))
+model.add(Dense(2, activation='softmax'))
+# ])
 
 print(model.summary())
 
 # compile the model
-model.compile(loss = keras.losses.BinaryCrossentropy(),
+model.compile(loss = 'sparse_categorical_crossentropy',
               optimizer = 'adam',
               metrics = ['accuracy'])
 
@@ -105,7 +118,8 @@ history = model.fit(train_ds,
                     validation_data = val_ds,
                     validation_steps = 14,
                     epochs = 10,
-                    callbacks = callbacks
+                    callbacks = callbacks,
+                    verbose=1,
                     )
 
 #serialize model to JSON
@@ -115,4 +129,3 @@ with open("model.json", "w") as json_file:
 # serialize weights to HDF5
 model.save_weights("model.h5")
 print("Saved model to disk")
-
