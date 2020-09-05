@@ -25,7 +25,7 @@ model.load_weights('model.h5')
 print("Loaded model from disk")
 
 # Compile the model
-model.compile(loss = keras.losses.BinaryCrossentropy(),
+model.compile(loss = 'sparse_categorical_crossentropy',
               optimizer = 'adam',
               metrics = ['accuracy'])
 
