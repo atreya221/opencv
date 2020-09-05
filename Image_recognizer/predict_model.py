@@ -22,7 +22,7 @@ model = model_from_json(loaded_model_json)
 
 # load weights into new model
 model.load_weights('model.h5')
-print("Loaded model from disk")
+# print("Loaded model from disk")
 
 # Compile the model
 model.compile(loss = 'sparse_categorical_crossentropy',

@@ -37,12 +37,13 @@ val_ds = keras.preprocessing.image_dataset_from_directory(
 )
 
 classes = train_ds.class_names
-print(classes)
+num_classes = len(classes)
+#print(classes)
 
 for images, labels in train_ds:
   images_shape = images.shape
   labels_shape = labels.shape
-  print(images.shape)
+  #print(images.shape)
   #print(type(images))
   break
 
@@ -87,7 +88,7 @@ model.add(Conv2D(64, 3, padding='same', activation='relu'))
 model.add(MaxPooling2D())
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
-model.add(Dense(2, activation='softmax'))
+model.add(Dense(num_classes, activation='softmax'))
 # ])
 
 print(model.summary())
@@ -105,7 +106,7 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 earlystop = EarlyStopping(patience=10)
 
-learning_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy', 
+learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss', 
                                             patience=2, 
                                             verbose=1, 
                                             factor=0.5, 
@@ -116,7 +117,6 @@ callbacks = [earlystop, learning_rate_reduction]
 
 history = model.fit(train_ds,
                     validation_data = val_ds,
-                    validation_steps = 14,
                     epochs = 10,
                     callbacks = callbacks,
                     verbose=1,
@@ -128,4 +128,4 @@ with open("model.json", "w") as json_file:
     json_file.write(model_json)
 # serialize weights to HDF5
 model.save_weights("model.h5")
-print("Saved model to disk")
+print("\nSaved model to disk\n")

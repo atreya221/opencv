@@ -49,6 +49,12 @@ if platform.system() == 'Linux':
   os.system('. ../.env/bin/activate; python restore.py')
     
 control2 = input("Thank you for being with us. We hope you enjoyed our application.\nPress 'r' to rerun the application and 'q' to exit\n")
+
+if platform.system() == 'Windows':
+  os.system('cls')
+if platform.system() == 'Linux':
+  os.system('clear')
+
 if control2 == 'r' :
   if platform.system() == 'Windows':
     os.system('..\.env\Scripts\\activate & python script.py')

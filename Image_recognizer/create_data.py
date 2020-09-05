@@ -31,6 +31,8 @@ suc = 1
 for class_cat in sorted(classes):
     dir_loc = input(f"Enter location of directory containing images of class '{class_cat}':\n")
     try:
+        if(os.path.exists(f'./data/train/{class_cat}')):
+          shutil.rmtree('./data/', ignore_errors = True)
         shutil.copytree(dir_loc, f'./data/train/{class_cat}')
     except:
         print("Please enter a valid location.")
