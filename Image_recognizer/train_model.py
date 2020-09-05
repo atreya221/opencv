@@ -52,9 +52,19 @@ for images, labels in train_ds:
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation, BatchNormalization
 
+data_augmentation = Sequential(
+  [
+    keras.layers.experimental.preprocessing.RandomFlip("horizontal", input_shape=(180, 180, 3)),
+    keras.layers.experimental.preprocessing.RandomRotation(0.1),
+    keras.layers.experimental.preprocessing.RandomZoom(0.1),
+  ]
+)
+
 model = Sequential()
 
-model.add(keras.layers.experimental.preprocessing.Rescaling(1./255, input_shape=(180, 180, 3))) # Normalize the dataset to improve accuracy
+
+model.add(data_augmentation)
+model.add(keras.layers.experimental.preprocessing.Rescaling(1./255)) # Normalize the dataset to improve accuracy
 """
 model.add(Conv2D(32, (3, 3), activation='relu'))  
 model.add(BatchNormalization())  # normalize the activations after each layer
@@ -86,6 +96,7 @@ model.add(Conv2D(32, 3, padding='same', activation='relu'))
 model.add(MaxPooling2D())
 model.add(Conv2D(64, 3, padding='same', activation='relu'))
 model.add(MaxPooling2D())
+model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
 model.add(Dense(num_classes, activation='softmax'))
