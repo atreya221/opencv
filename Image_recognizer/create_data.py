@@ -18,11 +18,11 @@ for i in range(2):
 # Additional classes
 while True:
   more_classes = input('Add another class? Press Y for yes, N for no.\n')
-  if more_classes == 'Y' or more_classes=='y':
+  if more_classes.lower() == 'y':
     count = count + 1
     class_name = input(f'Enter title of class {count}:\n')
     classes.append(class_name)
-  elif more_classes=='N' or more_classes=='n':
+  elif more_classes.lower() == 'n':
     break
   else:
     print('Please enter a valid choice.')
@@ -33,7 +33,7 @@ suc = 1
 for class_cat in sorted(classes):
     dir_loc = input(f"Enter location of directory containing images of class '{class_cat}':\n")
     try:
-        if(os.path.exists(f'./data/train/{class_cat}')):
+        if(os.path.exists(f'./data/train/{class_cat}')): # if path to the directory already exists then delete the directory
           shutil.rmtree('./data/', ignore_errors = True)
         shutil.copytree(dir_loc, f'./data/train/{class_cat}')
     except:

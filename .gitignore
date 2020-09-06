@@ -7,3 +7,4 @@ Digit_recognizer/test.jpg
 .vscode
 **/__pycache__
 **/.cph
+**/history

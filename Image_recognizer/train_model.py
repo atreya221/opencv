@@ -125,13 +125,34 @@ learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
 
 callbacks = [earlystop, learning_rate_reduction]
 
-
-history = model.fit(train_ds,
+try:
+    history = model.fit(train_ds,
                     validation_data = val_ds,
                     epochs = 10,
                     callbacks = callbacks,
                     verbose=1,
                     )
+except KeyboardInterrupt:
+    pass
+
+n = len([name for name in os.listdir('history') if os.path.isfile(name)])//2
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'], color='red')
+plt.xlabel('epochs')
+plt.ylabel('Accuracy')
+plt.title('Training and Validation Accuracy')
+plt.legend(['Training accuracy', 'Validation accuracy'], loc = 'lower right')
+plt.show()
+plt.savefig(f'history/accuracy.png_{n+1}')
+
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'], color='red')
+plt.xlabel('epochs')
+plt.ylabel('Loss')
+plt.title('Training and Validation Loss')
+plt.legend(['Training loss', 'Validation loss'], loc = 'upper right')
+plt.show()
+plt.savefig(f'history/loss.png_{n+1}')
 
 #serialize model to JSON
 model_json = model.to_json()
