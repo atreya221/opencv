@@ -10,7 +10,10 @@
 # Python package requirements for the project:
 
 tensorflow
-opencv-python
+PyQt5
+psutil
+opencv-python==4.3.0.36
+opencv-contrib-python
 matplotlib
 pyfastcopy
 

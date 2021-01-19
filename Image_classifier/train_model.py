@@ -65,6 +65,7 @@ model = Sequential()
 
 model.add(data_augmentation)
 model.add(keras.layers.experimental.preprocessing.Rescaling(1./255)) # Normalize the dataset to improve accuracy
+
 """
 model.add(Conv2D(32, (3, 3), activation='relu'))  
 model.add(BatchNormalization())  # normalize the activations after each layer
@@ -89,7 +90,8 @@ model.add(Dense(2, activation='softmax'))
 
 model = Sequential([
   layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
-  """
+  
+"""
 model.add(Conv2D(16, 3, padding='same', activation='relu'))
 model.add(MaxPooling2D())  
 model.add(Conv2D(32, 3, padding='same', activation='relu'))
@@ -117,23 +119,32 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 earlystop = EarlyStopping(patience=10)
 
-learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss', 
+learning_rate_reduction_loss = ReduceLROnPlateau(monitor='val_loss',
                                             patience=2, 
                                             verbose=1, 
                                             factor=0.5, 
                                             min_lr=0.00001)
 
-callbacks = [earlystop, learning_rate_reduction]
+learning_rate_reduction_acc = ReduceLROnPlateau(monitor='val_accuracy',
+                                            patience=2, 
+                                            verbose=1, 
+                                            factor=0.5, 
+                                            min_lr=0.00001)
+
+callbacks = [earlystop, learning_rate_reduction_loss, learning_rate_reduction_acc]
 
 try:
     history = model.fit(train_ds,
                     validation_data = val_ds,
-                    epochs = 10,
+                    epochs = 20,
                     callbacks = callbacks,
                     verbose=1,
                     )
 except KeyboardInterrupt:
     pass
+
+if(os.path.exists('./history')): pass
+else: os.mkdir('./history')
 
 n = len([name for name in os.listdir('history') if os.path.isfile(name)])//2
 plt.plot(history.history['accuracy'])
@@ -142,8 +153,9 @@ plt.xlabel('epochs')
 plt.ylabel('Accuracy')
 plt.title('Training and Validation Accuracy')
 plt.legend(['Training accuracy', 'Validation accuracy'], loc = 'lower right')
+plt.savefig(f'history/accuracy_{n+1}.png')
 plt.show()
-plt.savefig(f'history/accuracy.png_{n+1}')
+
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'], color='red')
@@ -151,8 +163,9 @@ plt.xlabel('epochs')
 plt.ylabel('Loss')
 plt.title('Training and Validation Loss')
 plt.legend(['Training loss', 'Validation loss'], loc = 'upper right')
+plt.savefig(f'history/loss_{n+1}.png')
 plt.show()
-plt.savefig(f'history/loss.png_{n+1}')
+
 
 #serialize model to JSON
 model_json = model.to_json()
